@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Card Box Website</title>
+    <title>💓My Miracle Destiny</title>
+    
+    
     <style>
+
+#ikon-situs {
+  width: 50px; /* Lebar gambar */
+  height: 50px; /* Tinggi gambar */
+  margin: 10px; /* Ruang sekitar gambar */
+  filter: grayscale(50%); /* Misalnya, mengubah warna menjadi abu-abu */
+}
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -125,8 +135,13 @@
             margin-top: 140px;
         }
     </style>
+
+<link rel="icon" type="image/png" href="vm.jpg">
+
 </head>
+
 <body>
+
     <div class="container">
         
         <div class="card4" id="card4">
@@ -171,7 +186,14 @@
                         <button>Lesgo</button>
                     </div>
                     <div class="card-box2" id="card2">
-                        <video id="video2" src="final part landscape.mp4"></video>
+                        <!-- <div id="player"></div>
+                        <iframe id="video2" width="560" height="315" src="https://www.youtube.com/embed/RMZOcLlHLAQ" frameborder="0" allowfullscreen></iframe> -->
+                        <!-- <video id="video2" src="final part landscape.mp4"></video> -->
+                        <h1>Video YouTube</h1>
+                        <div id="player"></div>
+                        <button id="playButton">Putar Video</button>
+                        
+                        <script src="https://www.youtube.com/iframe_api"></script>
                     </div>
 
                     <div class="card-box3" id="card3">
@@ -182,7 +204,7 @@
                     </div>
                 </div>
 
-                <p id="copyright">Created by Alford Stanley Harjadi 2023 #Miraclye Destiny2023</p>
+                <p id="copyright">Created by Alford Stanley Harjadi 2023 #MiracleDestiny2023</p>
             </div>
 
             <div class="card-box" id="cardbox2">
@@ -212,6 +234,8 @@
         </div>
     </div>
 </body>
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const video = document.getElementById("video1");
@@ -224,24 +248,70 @@
 
         // Sembunyikan video saat halaman dimuat
         video.style.display = "none";
-        card2.style.display = "none";
+        card2.style.display = "block";
         card3.style.display = "none";
         card4.style.display= "none";
         cbox2.style.display = "none";
 
+        // Inisialisasi variabel
+var player;
+var playButton = document.getElementById('playButton');
 
-        // Menambahkan event listener ke tombol
-        button.addEventListener("click", function() {
-            // Munculkan video
-            video.style.display = "block";
-            card1.style.display = "none";
-            card2.style.display= "block";
-        
+// Fungsi untuk memulai pemutaran video
+function playVideo() {
+    player = new YT.Player('player', {
+        height: '315',
+        width: '560',
+        videoId: 'RMZOcLlHLAQ', // Ganti dengan ID video YouTube yang sesuai
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
 
-            // Putar video secara otomatis
-            video.play();
-            video2.play();
-        });
+// Fungsi yang dipanggil saat pemutar video siap
+function onPlayerReady(event) {
+    playButton.addEventListener('click', function() {
+        event.target.playVideo();
+    });
+}
+
+// Fungsi yang dipanggil saat status pemutar video berubah
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+        // Pemutaran video selesai
+        // Eksekusi skrip lain di sini
+        skripLain();
+    }
+}
+
+// Fungsi untuk menjalankan skrip lain
+function skripLain() {
+    console.log('Skrip lain dieksekusi setelah video selesai diputar.');
+}
+
+// Memuat API YouTube Player
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+           // Menambahkan event listener ke tombol
+           button.addEventListener("click", function() {
+                        // Munculkan video
+                        video.style.display = "block";
+                        card1.style.display = "none";
+                        card2.style.display= "block";
+                    
+
+                        // Putar video secara otomatis
+                        video.play();
+                        video2.play();
+                   
+
+                    });
 
         // Event listener untuk mengulang video ketika selesai
         video.addEventListener("ended", function() {
